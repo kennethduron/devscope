@@ -35,3 +35,9 @@ One practical issue encountered during implementation was ensuring the applicati
 ## Reflection
 
 This Week 05 work established the core DevScope MVP around GitHub developer search. The project now supports a clean search form, profile and repository rendering, and user-friendly loading and error states. Building the app as modular vanilla JavaScript helped clarify how frontend architecture can stay maintainable as more features are added. I also confirmed that the project remains focused on the Week 05 learning goal without prematurely adding future Stack Exchange or final-project features. The next step is to expand the interface with additional polish and stronger validation while staying within the course scope.
+
+## Production Deployment and Validation
+
+DevScope was published to GitHub and deployed as a Render Static Site during Week 05. The public repository is https://github.com/kennethduron/devscope and the deployed production site is https://devscope-etxx.onrender.com.
+
+The production app was browser-tested after deployment to confirm the page loads, the search form is visible, blank input shows a validation message, the octocat search loads profile and repository data, invalid usernames display a friendly error, and a second valid search replaces the previous results cleanly. The project also remained responsive across the required mobile and desktop viewport widths without major layout issues. This verified the Week 05 MVP behavior in a live production environment.
