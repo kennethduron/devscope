@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="DevScope helps you search GitHub developers and review their profile and repositories."
+    />
+    <title>DevScope | Developer Profile Explorer</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="#top" class="brand" aria-label="DevScope home">
+          <span class="brand-mark">D</span>
+          <span>DevScope</span>
+        </a>
+        <nav class="main-nav" aria-label="Main navigation">
+          <a href="#top">Home</a>
+          <a href="#search">Search</a>
+          <a href="#repositories">Repositories</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top" class="page-shell">
+      <section class="hero container" aria-labelledby="main-title">
+        <div class="hero-copy">
+          <p class="eyebrow">Developer discovery</p>
+          <h1 id="main-title">Explore GitHub talent in one view.</h1>
+          <p>
+            Search a developer profile, review their key information, and explore the
+            repositories they maintain.
+          </p>
+        </div>
+      </section>
+
+      <section id="search" class="container content-panel" aria-labelledby="search-title">
+        <div class="section-heading">
+          <h2 id="search-title">Developer Search</h2>
+        </div>
+
+        <form id="search-form" class="search-form" novalidate>
+          <div class="field-group">
+            <label for="username">GitHub username</label>
+            <input
+              id="username"
+              name="username"
+              type="text"
+              autocomplete="off"
+              placeholder="e.g. octocat"
+              aria-describedby="search-help"
+            />
+          </div>
+          <button type="submit" class="primary-button">Search</button>
+        </form>
+        <p id="search-help" class="help-text">Enter a valid public GitHub username.</p>
+      </section>
+
+      <section class="container status-panel" aria-live="polite" aria-atomic="true">
+        <div id="status-message" class="status-message status-idle">
+          Ready to search for a developer.
+        </div>
+      </section>
+
+      <section class="container results-layout" aria-label="Developer results">
+        <div id="profile-container" class="results-column" aria-live="polite"></div>
+        <div id="repositories-container" class="results-column" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>DevScope</p>
+        <p>WDD 330</p>
+        <p>Kenneth Asael Durón Paz</p>
+      </div>
+    </footer>
+
+    <script type="module" src="./js/main.js"></script>
+  </body>
+</html>
