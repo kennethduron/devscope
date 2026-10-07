@@ -45,7 +45,8 @@ img {
 }
 
 button,
-input {
+input,
+select {
   font: inherit;
 }
 
@@ -192,28 +193,39 @@ input {
 
 .field-group input:focus-visible,
 .primary-button:focus-visible,
+.secondary-button:focus-visible,
 .nav-link:focus-visible,
 .repo-link:focus-visible,
-.profile-link:focus-visible {
+.profile-link:focus-visible,
+.favorite-open:focus-visible,
+.favorite-remove:focus-visible,
+.select-control:focus-visible {
   outline: 3px solid rgba(43, 109, 240, 0.25);
   outline-offset: 2px;
 }
 
-.field-group input:focus {
+.field-group input:focus,
+.select-control:focus {
   border-color: var(--accent);
   box-shadow: 0 0 0 4px rgba(43, 109, 240, 0.12);
 }
 
-.primary-button {
+.primary-button,
+.secondary-button,
+.favorite-open,
+.favorite-remove {
   min-height: 3rem;
   border: none;
   border-radius: 12px;
-  background: var(--accent);
-  color: #fff;
   padding: 0.85rem 1.2rem;
   font-weight: 700;
   cursor: pointer;
   transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.primary-button {
+  background: var(--accent);
+  color: #fff;
 }
 
 .primary-button:hover,
@@ -221,8 +233,53 @@ input {
   background: var(--accent-strong);
 }
 
-.primary-button:active {
+.secondary-button {
+  background: var(--panel-alt);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.secondary-button:hover,
+.secondary-button:focus-visible {
+  background: #e2ebff;
+}
+
+.primary-button:active,
+.secondary-button:active,
+.favorite-open:active,
+.favorite-remove:active {
   transform: translateY(1px);
+}
+
+button:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.stackexchange-search {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: end;
+  margin-top: 1rem;
+  padding: 1.25rem;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.stackexchange-search .field-group {
+  margin: 0;
+}
+
+.select-control {
+  width: 100%;
+  padding: 0.8rem 0.9rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text);
 }
 
 .help-text {
@@ -369,6 +426,105 @@ input {
   font-weight: 700;
 }
 
+.profile-actions {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 0.75rem;
+}
+
+.stack-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  animation: fadeIn 0.35s ease;
+}
+
+.stack-avatar {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(43, 109, 240, 0.12);
+}
+
+.stack-content {
+  flex: 1;
+}
+
+.stack-content h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.3rem;
+}
+
+.stack-reputation,
+.stack-location {
+  margin: 0 0 0.75rem;
+  color: var(--muted);
+}
+
+.stack-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.stack-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem 0.6rem;
+  border-radius: 999px;
+  background: var(--panel-alt);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.stack-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.8rem;
+  padding: 0.7rem 1rem;
+  border-radius: 12px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+}
+
+.repository-panel {
+  display: grid;
+  gap: 1rem;
+}
+
+.repository-toolbar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.toolbar-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.toolbar-field label {
+  font-weight: 600;
+}
+
 .repository-list {
   display: grid;
   gap: 1rem;
@@ -417,6 +573,55 @@ input {
 
 .empty-state {
   padding: 1.25rem;
+  color: var(--muted);
+}
+
+.favorites-panel {
+  margin-top: 1.5rem;
+}
+
+.favorite-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.favorite-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  padding: 0.85rem 1rem;
+}
+
+.favorite-open {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: var(--accent);
+  font-weight: 700;
+  text-align: left;
+}
+
+.favorite-remove {
+  background: var(--error-bg);
+  color: var(--error);
+  border: 1px solid rgba(180, 35, 24, 0.15);
+  padding-inline: 0.9rem;
+}
+
+.favorite-empty {
+  list-style: none;
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  border: 1px dashed var(--border);
+  background: var(--panel);
   color: var(--muted);
 }
 

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="DevScope helps you search GitHub developers and review their profile and repositories."
+      content="DevScope helps you search GitHub developers and review their profile, repositories, and Stack Overflow profile."
     />
     <title>DevScope | Developer Profile Explorer</title>
     <link rel="stylesheet" href="./css/styles.css" />
@@ -20,6 +20,7 @@
         <nav class="main-nav" aria-label="Main navigation">
           <a href="#top">Home</a>
           <a href="#search">Search</a>
+          <a href="#favorites">Favorites</a>
           <a href="#repositories">Repositories</a>
         </nav>
       </div>
@@ -29,10 +30,10 @@
       <section class="hero container" aria-labelledby="main-title">
         <div class="hero-copy">
           <p class="eyebrow">Developer discovery</p>
-          <h1 id="main-title">Explore GitHub talent in one view.</h1>
+          <h1 id="main-title">Explore GitHub and Stack Overflow talent in one view.</h1>
           <p>
-            Search a developer profile, review their key information, and explore the
-            repositories they maintain.
+            Search a developer profile, review their GitHub work, and compare Stack Overflow activity
+            with a second public API.
           </p>
         </div>
       </section>
@@ -54,20 +55,42 @@
               aria-describedby="search-help"
             />
           </div>
-          <button type="submit" class="primary-button">Search</button>
+          <button id="github-search-button" type="submit" class="primary-button">Search GitHub</button>
         </form>
-        <p id="search-help" class="help-text">Enter a valid public GitHub username.</p>
+
+        <div class="stackexchange-search" aria-labelledby="stackoverflow-search-title">
+          <div class="field-group">
+            <label id="stackoverflow-search-title" for="stackoverflow-name">Stack Overflow display name</label>
+            <input
+              id="stackoverflow-name"
+              name="stackoverflow-name"
+              type="text"
+              autocomplete="off"
+              placeholder="e.g. octocat or Jane Doe"
+            />
+          </div>
+          <button id="stackoverflow-search-button" type="button" class="secondary-button">
+            Lookup Stack Overflow
+          </button>
+        </div>
+
+        <p id="search-help" class="help-text">Search a public GitHub username and optionally look up a matching Stack Overflow profile.</p>
       </section>
 
       <section class="container status-panel" aria-live="polite" aria-atomic="true">
-        <div id="status-message" class="status-message status-idle">
-          Ready to search for a developer.
-        </div>
+        <div id="status-message" class="status-message status-idle">Ready to search for a developer.</div>
       </section>
 
       <section class="container results-layout" aria-label="Developer results">
         <div id="profile-container" class="results-column" aria-live="polite"></div>
         <div id="repositories-container" class="results-column" aria-live="polite"></div>
+      </section>
+
+      <section id="favorites" class="container favorites-panel" aria-labelledby="favorites-title">
+        <div class="section-heading">
+          <h2 id="favorites-title">Favorites</h2>
+        </div>
+        <ul id="favorites-list" class="favorite-list" aria-live="polite"></ul>
       </section>
     </main>
 
