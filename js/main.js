@@ -185,12 +185,23 @@ function renderFavoritesList() {
     const item = document.createElement('li');
     item.className = 'favorite-item';
 
+    const favoriteProfile = document.createElement('div');
+    favoriteProfile.className = 'favorite-profile';
+
+    const avatar = document.createElement('img');
+    avatar.className = 'favorite-avatar';
+    avatar.src =
+      favorite?.avatar ||
+      'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png';
+    avatar.alt = `${favorite.login} GitHub avatar`;
+
+    const favoriteDetails = document.createElement('div');
+    favoriteDetails.className = 'favorite-details';
+
     const openButton = document.createElement('button');
     openButton.type = 'button';
     openButton.className = 'favorite-open';
-    openButton.textContent = favorite?.stackOverflowDisplayName
-      ? `${favorite.login} · ${favorite.stackOverflowDisplayName}`
-      : favorite.login;
+    openButton.textContent = favorite.login;
     openButton.addEventListener('click', async () => {
       githubUsernameField.value = favorite.login;
       if (favorite.stackOverflowDisplayName) {
@@ -198,6 +209,28 @@ function renderFavoritesList() {
       }
       await handleGitHubSearch({ preventDefault() {} });
     });
+
+    favoriteDetails.appendChild(openButton);
+
+    if (favorite.stackOverflowDisplayName) {
+      const stackOverflowName = document.createElement('p');
+      stackOverflowName.className = 'favorite-stack-name';
+      stackOverflowName.textContent = `Stack Overflow: ${favorite.stackOverflowDisplayName}`;
+      favoriteDetails.appendChild(stackOverflowName);
+    }
+
+    const favoriteActions = document.createElement('div');
+    favoriteActions.className = 'favorite-actions';
+
+    if (favorite?.stackOverflowUserId) {
+      const stackOverflowLink = document.createElement('a');
+      stackOverflowLink.className = 'favorite-stack-link';
+      stackOverflowLink.href = `https://stackoverflow.com/users/${encodeURIComponent(favorite.stackOverflowUserId)}`;
+      stackOverflowLink.target = '_blank';
+      stackOverflowLink.rel = 'noopener noreferrer';
+      stackOverflowLink.textContent = 'Open Stack Overflow';
+      favoriteActions.appendChild(stackOverflowLink);
+    }
 
     const removeButton = document.createElement('button');
     removeButton.type = 'button';
@@ -209,7 +242,9 @@ function renderFavoritesList() {
       renderFavoritesList();
     });
 
-    item.append(openButton, removeButton);
+    favoriteActions.appendChild(removeButton);
+    favoriteProfile.append(avatar, favoriteDetails);
+    item.append(favoriteProfile, favoriteActions);
     favoritesList.appendChild(item);
   });
 }
